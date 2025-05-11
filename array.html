@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="style/array_style.css" />
+    <title>Arrays</title>
+  </head>
+  <body>
+    <h1>Todo List Practice 1</h1>
+    <div class="todo-input todo-input-grid">
+      <input
+        placeholder="Todo list"
+        class="js-name-input"
+        onkeydown="enter(event);
+    "
+      />
+      <input type="date" class="js-date" />
+      <button id="add" class="add-button" onclick="addTodo()">Add</button>
+    </div>
+    <div class="work-list todo-grid"></div>
+    <script src="javascript/array_main.js"></script>
+  </body>
+</html>

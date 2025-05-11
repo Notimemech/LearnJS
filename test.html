@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="style/style-test.css" />
+    <title>Test</title>
+  </head>
+  <body>
+    <div class="header-container">
+      <h1>Shop</h1>
+      <div class="payment-area">
+        <p class="yourcart">Your cart: 0</p>
+        <button class="paying-button" style="margin-left: 30px">
+          Paying the bill
+        </button>
+      </div>
+    </div>
+    <div class="container-content">
+      <div class="product1">
+        <img src="/image/echoForge.jpg" alt="" />
+        <h3 class="product1-name">Logo 1</h3>
+        <p>Price: <span class="product1-price">42</span>$</p>
+        <button onclick="addToCart('product1')" class="add-logo1-button">
+          Add to cart
+        </button>
+      </div>
+      <div>
+        <img src="/image/logo.jpg" alt="" />
+        <h3>Logo 2</h3>
+        <p>Price: <span class="price">42</span>$</p>
+        <button class="add-logo2-button">Add to cart</button>
+      </div>
+      <div>
+        <img src="/image/poseidon.jpg" alt="" />
+        <h3>Logo 3</h3>
+        <p>Price: <span class="price">42</span>$</p>
+        <button class="add-logo3-button">Add to cart</button>
+      </div>
+    </div>
+    <script src="javascript/test-main.js"></script>
+  </body>
+</html>
