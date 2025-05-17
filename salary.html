@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Salary</title>
+    <link rel="stylesheet" href="/style/salary.css" />
+  </head>
+  <body>
+    <h1>Salary Caculator</h1>
+    <div>
+      <div class="form-input">
+        Name
+        <select name="EmpName" class="js-name-input">
+          <option value=""></option>
+          <option>Phương Linh</option>
+          <option>Quang Anh</option>
+          <option>Vượng</option>
+          <option>Bảo Linh</option>
+          <option>Thanh</option>
+        </select>
+      </div>
+      <div class="form-input">
+        Start: <input type="number" class="js-start-input" />
+      </div>
+      <div class="form-input">
+        End: <input type="number" class="js-end-input" />
+      </div>
+      <div class="form-input">
+        Ship
+        <input type="number" class="js-ship-input" />
+      </div>
+      <button type="submit" class="js-submit-button">Add</button>
+    </div>
+    <table class="table">
+      <tr>
+        <th class="name">Name</th>
+        <th>Start</th>
+        <th>End</th>
+        <th>Sum Hour</th>
+        <th>Total of Hour</th>
+        <th>Ship</th>
+        <th>Total of Ship</th>
+        <th>Total Money</th>
+      </tr>
+    </table>
+    <script src="./javascript/salary.js"></script>
+  </body>
+</html>

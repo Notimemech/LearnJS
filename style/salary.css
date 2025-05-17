@@ -1,0 +1,21 @@
+table, th, td{
+    border: 1px solid black;
+    padding: 5px 15px;
+    border-collapse: collapse;
+}
+
+
+.name{
+    padding:0px 100px;
+}
+form{
+    position: relative;
+}
+input, select{
+    position: absolute;
+    left: 50px;
+}
+
+.form-input{
+    margin: 10px 0px;
+}
