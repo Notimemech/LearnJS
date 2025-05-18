@@ -1,3 +1,8 @@
+import { Validation } from "./validation.js";
+
+//import from validation class
+let val = new Validation();
+
 //count to create unchangable id
 let idCount = 0;
 
@@ -34,13 +39,24 @@ class Employee {
   getTotal() {
     return this.getTotalHour() + this.getTotalShip();
   }
+
+  static fromJSON(obj) {
+    return new Employee(obj.name, obj.start, obj.end, obj.ship);
+  }
 }
 
-// Employee array as sample database
-const EmployeeArray = [
-  new Employee("Phương Linh", 3, 9, 0),
-  new Employee("Quang Anh", 3, 9, 0),
-];
+// Save data to local storage
+
+let EmployeeArray = [];
+
+const rawData = localStorage.getItem("employeeArray");
+
+if (rawData) {
+  const parsed = JSON.parse(rawData);
+  if (Array.isArray(parsed) && parsed.length > 0) {
+    EmployeeArray = parsed.map(Employee.fromJSON);
+  }
+}
 
 //get the input in html
 let addButton = document.querySelector(".js-submit-button");
@@ -64,28 +80,46 @@ let employeeHTML = `
 //print out the new input
 const print = function () {
   EmployeeArray.forEach((employee) => {
+    console.log(employee);
     let html = `
         <tr>
           <td class="name">${employee.name}</td>
           <td>${employee.start}</td>
           <td>${employee.end}</td>
-          <td>${employee.getSumHour()}</td>
-          <td>${employee.getTotalHour()}</td>
+          <td>${employee.end - employee.start}</td>
+          <td>${(employee.end - employee.start) * 20000}</td>
           <td>${employee.ship}</td>
-          <td>${employee.getTotalShip()}</td>
-          <td>${employee.getTotal()}</td>
+          <td>${employee.ship * 6000}</td>
+          <td>${
+            (employee.end - employee.start) * 20000 + employee.ship * 6000
+          }</td>
         </tr>
         `;
 
     employeeHTML += html;
-    console.log(employee.id);
   });
 
   document.querySelector(".table").innerHTML = employeeHTML;
+
+  nameInput.value = "";
+  startInput.value = "";
+  endInput.value = "";
+  shipInput.value = "";
 };
+
+//print out local input
+print();
 
 //on click event of submit button
 addButton.addEventListener("click", () => {
+  // if (
+  //   nameInput.value === "" ||
+  //   startInput.value === "" ||
+  //   endInput.value === "" ||
+  //   shipInput.value === ""
+  // ) {
+  //   alert("You must fill all the part");
+  // } else {
   let emp = new Employee(
     nameInput.value,
     startInput.value,
@@ -94,7 +128,7 @@ addButton.addEventListener("click", () => {
   );
 
   EmployeeArray.push(emp);
-  print(emp);
+  print();
   employeeHTML = `
     <tr>
         <th class="name">Name</th>
@@ -106,4 +140,6 @@ addButton.addEventListener("click", () => {
         <th>Total of Ship</th>
         <th>Total Money</th>
       </tr>`;
+  localStorage.setItem("employeeArray", JSON.stringify(EmployeeArray));
+  //  }
 });
