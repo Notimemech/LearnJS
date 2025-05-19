@@ -3,14 +3,10 @@ import { Validation } from "./validation.js";
 //import from validation class
 let val = new Validation();
 
-//count to create unchangable id
-let idCount = 0;
-
 /*
-Employee class that have id, name, start, end, ship
+Employee class that have name, start, end, ship
 */
 class Employee {
-  id;
   name;
   start;
   end;
@@ -21,7 +17,6 @@ class Employee {
     this.start = start;
     this.end = end;
     this.ship = ship;
-    this.id = idCount++;
   }
 
   getSumHour() {
@@ -67,6 +62,7 @@ let shipInput = document.querySelector(".js-ship-input");
 
 let employeeHTML = `
     <tr>
+        <th class="date">Date</th>
         <th class="name">Name</th>
         <th>Start</th>
         <th>End</th>
@@ -78,11 +74,12 @@ let employeeHTML = `
       </tr>`;
 
 //print out the new input
-const print = function () {
+const printEmp = function () {
   EmployeeArray.forEach((employee) => {
     console.log(employee);
     let html = `
         <tr>
+          <td class="date">Date</td>
           <td class="name">${employee.name}</td>
           <td>${employee.start}</td>
           <td>${employee.end}</td>
@@ -108,29 +105,30 @@ const print = function () {
 };
 
 //print out local input
-print();
+printEmp();
 
 //on click event of submit button
 addButton.addEventListener("click", () => {
-  // if (
-  //   nameInput.value === "" ||
-  //   startInput.value === "" ||
-  //   endInput.value === "" ||
-  //   shipInput.value === ""
-  // ) {
-  //   alert("You must fill all the part");
-  // } else {
-  let emp = new Employee(
-    nameInput.value,
-    startInput.value,
-    endInput.value,
-    shipInput.value
-  );
+  if (
+    nameInput.value === "" ||
+    startInput.value === "" ||
+    endInput.value === "" ||
+    shipInput.value === ""
+  ) {
+    alert("You must fill all the part");
+  } else {
+    let emp = new Employee(
+      nameInput.value,
+      startInput.value,
+      endInput.value,
+      shipInput.value
+    );
 
-  EmployeeArray.push(emp);
-  print();
-  employeeHTML = `
+    EmployeeArray.push(emp);
+    printEmp();
+    employeeHTML = `
     <tr>
+        <th class="date">Date</th>
         <th class="name">Name</th>
         <th>Start</th>
         <th>End</th>
@@ -140,6 +138,16 @@ addButton.addEventListener("click", () => {
         <th>Total of Ship</th>
         <th>Total Money</th>
       </tr>`;
-  localStorage.setItem("employeeArray", JSON.stringify(EmployeeArray));
-  //  }
+    localStorage.setItem("employeeArray", JSON.stringify(EmployeeArray));
+  }
+});
+
+//onclick event for reset button
+const resetButton = document.querySelector(".js-reset-button");
+
+resetButton.addEventListener("click", () => {
+  EmployeeArray = [];
+  localStorage.removeItem("employeeArray");
+  console.log(EmployeeArray);
+  document.querySelector(".table").innerHTML = employeeHTML;
 });
