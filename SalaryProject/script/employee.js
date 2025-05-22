@@ -2,16 +2,18 @@
 Employee class that have name, start, end, ship
 */
 export class Employee {
+  id;
   name;
   start;
   end;
   ship;
 
-  constructor(name, start, end, ship) {
+  constructor(name, start, end, ship, id) {
     this.name = name;
     this.start = start;
     this.end = end;
     this.ship = ship;
+    this.id = id;
   }
 
   getSumHour() {

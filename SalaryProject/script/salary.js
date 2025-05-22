@@ -75,6 +75,18 @@ const printEmp = function () {
 
 //print out local input
 printEmp();
+employeeHTML = `
+    <tr>
+        <th class="date">Date</th>
+        <th class="name">Name</th>
+        <th>Start</th>
+        <th>End</th>
+        <th>Sum Hour</th>
+        <th>Total of Hour</th>
+        <th>Ship</th>
+        <th>Total of Ship</th>
+        <th>Total Money</th>
+      </tr>`;
 
 //on click event of submit button
 addButton.addEventListener("click", () => {
@@ -91,7 +103,8 @@ addButton.addEventListener("click", () => {
       nameInput.value,
       startInput.value,
       endInput.value,
-      shipInput.value
+      shipInput.value,
+      undefined
     );
 
     let today = new Date(dateInput.value);
@@ -99,6 +112,8 @@ addButton.addEventListener("click", () => {
     let empToday = new EmployeeToday(emp, today);
 
     EmployeeArray.push(empToday);
+    empToday.Employee.id = EmployeeArray.indexOf(empToday);
+    console.log(empToday.Employee);
     printEmp();
     employeeHTML = `
     <tr>
@@ -127,3 +142,7 @@ resetButton.addEventListener("click", () => {
   console.log(EmployeeArray);
   document.querySelector(".table").innerHTML = employeeHTML;
 });
+
+let deleteButton = document.querySelector(".js-delete-button");
+
+// deleteButton.addEventListener("click", () => {});
