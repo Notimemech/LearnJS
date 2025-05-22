@@ -57,6 +57,7 @@ const printEmp = function () {
             (employee.Employee.end - employee.Employee.start) * 20000 +
             employee.Employee.ship * 6000
           }</td>
+          <td><button class="js-delete-button delete-button">Delete</button></td>
         </tr>
         `;
 

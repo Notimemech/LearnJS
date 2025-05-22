@@ -1,3 +1,14 @@
+@import url("https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,200..1000;1,200..1000&display=swap");
+
+body {
+  background-color: #f5a18c;
+  font-family: "Nunito", sans-serif;
+  font-size: 1.3rem;
+}
+table {
+  margin: 50px;
+}
+
 table,
 th,
 td {
@@ -7,7 +18,7 @@ td {
 }
 
 .name {
-  padding: 0px 100px;
+  padding: 0px 70 px;
 }
 .date {
   padding: 0px 100px;
@@ -18,9 +29,41 @@ form {
 input,
 select {
   position: absolute;
-  left: 50px;
+  left: 70px;
 }
 
 .form-input {
   margin: 10px 0px;
+}
+
+.delete-button {
+  border: solid 2px #faf0c4;
+  padding: 10px 20px;
+  background-color: #e62f48;
+  color: #faf0c4;
+  border-radius: 5px;
+}
+
+.delete-button:hover {
+  border: solid 2px #e62f48;
+  padding: 10px 20px;
+  background-color: #faf0c4;
+  color: #e62f48;
+}
+
+.add-button,
+.reset-button {
+  border: solid 2px #faf0c4;
+  padding: 10px 20px;
+  background-color: #a69e03;
+  color: #faf0c4;
+  border-radius: 5px;
+}
+
+.reset-button:hover,
+.add-button:hover {
+  border: solid 2px #a69e03;
+  padding: 10px 20px;
+  background-color: #faf0c4;
+  color: #a69e03;
 }
