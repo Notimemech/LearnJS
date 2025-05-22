@@ -19,4 +19,17 @@ export class Validation {
   }
 }
 
-console.log("hello");
+//format date
+export function formatDate(today) {
+  let dateToday = new Date(today);
+
+  let formats = {
+    weekday: "long",
+    year: "numeric",
+    month: "numeric",
+    day: "numeric",
+  };
+
+  let formattedDate = dateToday.toLocaleDateString("vi-VN", formats);
+  return formattedDate;
+}

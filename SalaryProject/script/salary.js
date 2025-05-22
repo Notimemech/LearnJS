@@ -1,44 +1,8 @@
-import { Validation } from "./validation.js";
-
-//import from validation class
-let val = new Validation();
-
-/*
-Employee class that have name, start, end, ship
-*/
-class Employee {
-  name;
-  start;
-  end;
-  ship;
-
-  constructor(name, start, end, ship) {
-    this.name = name;
-    this.start = start;
-    this.end = end;
-    this.ship = ship;
-  }
-
-  getSumHour() {
-    return this.end - this.start;
-  }
-
-  getTotalHour() {
-    return this.getSumHour() * 20000;
-  }
-
-  getTotalShip() {
-    return this.ship * 6000;
-  }
-
-  getTotal() {
-    return this.getTotalHour() + this.getTotalShip();
-  }
-
-  static fromJSON(obj) {
-    return new Employee(obj.name, obj.start, obj.end, obj.ship);
-  }
-}
+import { Validation } from "./ulti.js";
+import { Employee } from "./employee.js";
+import { EmployeeToday } from "./employee.js";
+import { formatDate } from "./ulti.js";
+import "./ulti.js";
 
 // Save data to local storage
 
@@ -49,7 +13,7 @@ const rawData = localStorage.getItem("employeeArray");
 if (rawData) {
   const parsed = JSON.parse(rawData);
   if (Array.isArray(parsed) && parsed.length > 0) {
-    EmployeeArray = parsed.map(Employee.fromJSON);
+    EmployeeArray = parsed.map(EmployeeToday.fromJSON);
   }
 }
 
@@ -59,6 +23,7 @@ let nameInput = document.querySelector(".js-name-input");
 let startInput = document.querySelector(".js-start-input");
 let endInput = document.querySelector(".js-end-input");
 let shipInput = document.querySelector(".js-ship-input");
+let dateInput = document.querySelector(".js-date-input");
 
 let employeeHTML = `
     <tr>
@@ -73,22 +38,24 @@ let employeeHTML = `
         <th>Total Money</th>
       </tr>`;
 
-//print out the new input
+//print out the employee list
 const printEmp = function () {
   EmployeeArray.forEach((employee) => {
+    let today = formatDate(employee.date);
     console.log(employee);
     let html = `
-        <tr>
-          <td class="date">Date</td>
-          <td class="name">${employee.name}</td>
-          <td>${employee.start}</td>
-          <td>${employee.end}</td>
-          <td>${employee.end - employee.start}</td>
-          <td>${(employee.end - employee.start) * 20000}</td>
-          <td>${employee.ship}</td>
-          <td>${employee.ship * 6000}</td>
+        <tr class = "table-row">
+          <td class="date">${today}</td>
+          <td class="name">${employee.Employee.name}</td>
+          <td>${employee.Employee.start}</td>
+          <td>${employee.Employee.end}</td>
+          <td>${employee.Employee.end - employee.Employee.start}</td>
+          <td>${(employee.Employee.end - employee.Employee.start) * 20000}</td>
+          <td>${employee.Employee.ship}</td>
+          <td>${employee.Employee.ship * 6000}</td>
           <td>${
-            (employee.end - employee.start) * 20000 + employee.ship * 6000
+            (employee.Employee.end - employee.Employee.start) * 20000 +
+            employee.Employee.ship * 6000
           }</td>
         </tr>
         `;
@@ -98,6 +65,7 @@ const printEmp = function () {
 
   document.querySelector(".table").innerHTML = employeeHTML;
 
+  dateInput.value = "";
   nameInput.value = "";
   startInput.value = "";
   endInput.value = "";
@@ -110,6 +78,7 @@ printEmp();
 //on click event of submit button
 addButton.addEventListener("click", () => {
   if (
+    dateInput.value === "" ||
     nameInput.value === "" ||
     startInput.value === "" ||
     endInput.value === "" ||
@@ -124,7 +93,11 @@ addButton.addEventListener("click", () => {
       shipInput.value
     );
 
-    EmployeeArray.push(emp);
+    let today = new Date(dateInput.value);
+
+    let empToday = new EmployeeToday(emp, today);
+
+    EmployeeArray.push(empToday);
     printEmp();
     employeeHTML = `
     <tr>
@@ -138,6 +111,7 @@ addButton.addEventListener("click", () => {
         <th>Total of Ship</th>
         <th>Total Money</th>
       </tr>`;
+    console.log(EmployeeArray);
     localStorage.setItem("employeeArray", JSON.stringify(EmployeeArray));
   }
 });
@@ -148,6 +122,7 @@ const resetButton = document.querySelector(".js-reset-button");
 resetButton.addEventListener("click", () => {
   EmployeeArray = [];
   localStorage.removeItem("employeeArray");
+  printEmp();
   console.log(EmployeeArray);
   document.querySelector(".table").innerHTML = employeeHTML;
 });
